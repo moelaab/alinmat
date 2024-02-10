@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+import itables.options as opt
+from itables import init_notebook_mode
+
+opt.classes = ["display", "cell-border"]
+init_notebook_mode(all_interactive=True)
+
+def make_clickable(id,name):
+    return f'<a href="https://threathunterplaybook.com/hunts/windows/{id}/notebook.html">{name}</a>'
+
+df = pd.read_csv('analytic_summary.csv')
+df['Title'] = df.apply(lambda x: make_clickable(x['Id'], x['Title']), axis=1)
+df.drop('Id', axis=1, inplace=True)
+df
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-1-eac68579c40a>[0m in [0;36m<cell line: 2>[0;34m()[0m
+[1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mimport[0m [0mitables[0m[0;34m.[0m[0moptions[0m [0;32mas[0m [0mopt[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0;32mfrom[0m [0mitables[0m [0;32mimport[0m [0minit_notebook_mode[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0mopt[0m[0;34m.[0m[0mclasses[0m [0;34m=[0m [0;34m[[0m[0;34m"display"[0m[0;34m,[0m [0;34m"cell-border"[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'itables'
+
+[0;31m---------------------------------------------------------------------------[0;32m
+NOTE: If your import is failing due to a missing package, you can
+manually install dependencies using either !pip or !apt.
+
+To view examples of installing some common dependencies, click the
+"Open Examples" button below.
+[0;31m---------------------------------------------------------------------------[0m
+
+
